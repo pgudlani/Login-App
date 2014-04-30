@@ -14,14 +14,20 @@ class SignUpForm(forms.ModelForm):
     fields = ['name','email','username']
 
   def clean(self):
-    data = super(RegistrationForm, self).clean()
-    if 'password1' in self.data and 'password2' in self.data:
+    data = super(SignUpForm, self).clean()
+    if 'username' in self.data and User.objects.filter(username=self.data['username']).exists():
+      raise forms.ValidationError("User there.")
+            
+    elif 'password1' in self.data and 'password2' in self.data:
       if self.data['password1'] != self.data['password2']:
         raise forms.ValidationError("Passwords don't match. Please enter both fields again.")
-        return self.data
+      return self.data
+
+    else:
+      raise forms.ValidationError("Passwords not there.")
 
   def save(self, commit=True):
-    user = super(RegistrationForm, self).save(commit=False)
+    user = super(SignUpForm, self).save(commit=False)
     user.set_password(self.data['password1'])
     if commit:
       user.save()
