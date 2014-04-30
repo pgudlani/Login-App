@@ -1,0 +1,11 @@
+Files -  {{files.count}}
+{% for file in files %}
+<br>
+<br>
+{{file.name}} by {{file.user.name}}
+<br>
+{{file.description}}
+<br>
+{%  endfor  %}
+
+<a href='/logout/'>LogOut</a>
