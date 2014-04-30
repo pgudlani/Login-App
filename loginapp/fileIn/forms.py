@@ -1,13 +1,13 @@
-from djnago import forms
+from django import forms
 from fileIn.models import *
 
 
 class SignUpForm(forms.ModelForm):
-  name = forms.CharField(widget=forms.widget.TextInput, label="Your Name")
-  email = forms.EmailField(widget=forms.widget.TextInput, label="Email")
-  username = forms.CharField(widget=forms.widget.TextInput, label="Pick a Username")
-  password1 = forms.CharField(widget=forms.widget.PasswordInput, label="Password")
-  password2 = forms.CharField(widget=forms.widget.PasswordInput, label="Password (again)")
+  name = forms.CharField(widget=forms.TextInput, label="Your Name")
+  email = forms.EmailField(widget=forms.TextInput, label="Email")
+  username = forms.CharField(widget=forms.TextInput, label="Pick a Username")
+  password1 = forms.CharField(widget=forms.PasswordInput, label="Password")
+  password2 = forms.CharField(widget=forms.PasswordInput, label="Password (again)")
 
   class Meta:
     model = User
@@ -30,8 +30,8 @@ class SignUpForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-  username = forms.CharField(widget=forms.widget.TextInput, label='Username')
-  password = forms.CharField(widget=forms.widget.PasswordInput, label="Password")
+  username = forms.CharField(widget=forms.TextInput, label='Username')
+  password = forms.CharField(widget=forms.PasswordInput, label="Password")
 
   class Meta:
     fields = ['username','password']

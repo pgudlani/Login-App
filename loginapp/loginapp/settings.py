@@ -5,6 +5,9 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+PROJECT_ROOT = os.path.dirname(__file__)
+
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -110,7 +113,7 @@ ROOT_URLCONF = 'loginapp.urls'
 WSGI_APPLICATION = 'loginapp.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.getcwd()+'/templates/',
+    os.path.join(PROJECT_ROOT, '../templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

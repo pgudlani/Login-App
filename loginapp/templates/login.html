@@ -1,0 +1,9 @@
+{% if error %}
+{{error}}
+{% endif %}
+
+<form action="" method="post" class='uniForm'>{% csrf_token %}
+  {{ form.as_p }}
+  <br>
+  <input type="submit" value="Sign In"></input>
+</form>
