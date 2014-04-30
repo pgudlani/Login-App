@@ -46,3 +46,22 @@ class SignUpView(View):
       return HttpResponseRedirect('/home/')
     form = SignUpForm()
     return render_to_response('login.html', {'form' : form}, context_instance=RequestContext(request))
+
+
+class HomeView(ListView):
+  model = File
+  template_name = 'file_list.html'
+  context_object_name = 'files'
+  
+  def dispatch(self, *args, **kwargs):
+    if self.request.user and self.request.user.is_active:
+      return super(HomeView, self).dispatch(*args, **kwargs)
+    else:
+      return HttpResponseRedirect('/login/')
+  
+  
+
+class LogoutView(View):
+  def get(self, request, *args, **kwargs):
+    logout(self.request)
+    return HttpResponseRedirect('/login/')
