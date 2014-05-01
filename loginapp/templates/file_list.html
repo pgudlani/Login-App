@@ -1,3 +1,15 @@
+
+<form action="/upload/" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+File: <input type="file" name="filename"><br>
+Name: <input type="text" name="name"><br>
+Desc: <input type="text" name="description"><br>
+
+<input type="submit" value="Upload"><br>
+</form>
+
+
 Files -  {{files.count}}
 {% for file in files %}
 <br>
@@ -8,4 +20,6 @@ Files -  {{files.count}}
 <br>
 {%  endfor  %}
 
+
 <a href='/logout/'>LogOut</a>
+

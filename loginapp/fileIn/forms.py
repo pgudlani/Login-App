@@ -41,3 +41,15 @@ class LoginForm(forms.Form):
 
   class Meta:
     fields = ['username','password']
+
+
+
+class FileUploadForm(forms.ModelForm):
+  name = forms.CharField(widget=forms.TextInput)
+  description = forms.CharField(widget=forms.TextInput)
+  filename = forms.FileField()
+
+  class Meta:
+    model = File
+    fields = ['user','name','description','filename']
+

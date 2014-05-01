@@ -65,3 +65,13 @@ class LogoutView(View):
   def get(self, request, *args, **kwargs):
     logout(self.request)
     return HttpResponseRedirect('/login/')
+
+
+class UploadView(View):
+  def post(self, request, *args, **kwargs):
+    self.request.POST['user'] = self.request.user.id
+    form = FileUploadForm(self.request.POST, self.request.FILES)
+    print form
+    if form.is_valid():
+      user = form.save()
+    return HttpResponseRedirect('/home/')
