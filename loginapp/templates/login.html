@@ -1,9 +1,26 @@
+
 {% if error %}
 {{error}}
 {% endif %}
 
+
 <form action="" method="post" class='uniForm'>{% csrf_token %}
   {{ form.as_p }}
   <br>
-  <input type="submit" value="Sign In"></input>
+  {% if login %}
+  <input class="button" type="submit" value="Login"></input>
+  {% else %}
+  <input class="button" type="submit" value="Sign In"></input>
+  {% endif %}
+  
 </form>
+
+<br>
+<br>
+
+{% if login %}
+<a href="/signup/">Sign Up</a>
+{% else %}
+<a href="/login/">Login</a>
+{% endif %}
+

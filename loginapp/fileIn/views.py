@@ -24,13 +24,13 @@ class LoginView(View):
         error = 'Wrong Password'
       else:
         error = 'User Not There'
-    return render_to_response('login.html', {'form':form, 'error':error}, context_instance=RequestContext(request))
+    return render_to_response('login.html', {'form':form, 'error':error, 'login':True}, context_instance=RequestContext(request))
 
   def get(self, request, *args, **kwargs):
     if self.request.user and self.request.user.is_active:
       return HttpResponseRedirect('/home/')
     form = LoginForm()
-    return render_to_response('login.html', {'form' : form}, context_instance=RequestContext(request))
+    return render_to_response('login.html', {'form' : form, 'login':True}, context_instance=RequestContext(request))
 
 
 class SignUpView(View):
@@ -40,18 +40,21 @@ class SignUpView(View):
     if form.is_valid():
       user = form.save()
       return HttpResponseRedirect('/home/')
-    return render_to_response('login.html', {'form':form, 'error':error}, context_instance=RequestContext(request))
+    return render_to_response('login.html', {'form':form, 'error':error, 'login':False}, context_instance=RequestContext(request))
   def get(self, request, *args, **kwargs):
     if self.request.user and self.request.user.is_active:
       return HttpResponseRedirect('/home/')
     form = SignUpForm()
-    return render_to_response('login.html', {'form' : form}, context_instance=RequestContext(request))
+    return render_to_response('login.html', {'form' : form, 'login':False}, context_instance=RequestContext(request))
 
 
 class HomeView(ListView):
   model = File
   template_name = 'file_list.html'
   context_object_name = 'files'
+
+  def get_queryset(self):
+    return File.objects.all().order_by('-id')
   
   def dispatch(self, *args, **kwargs):
     if self.request.user and self.request.user.is_active:
