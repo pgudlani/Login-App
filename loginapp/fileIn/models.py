@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 
 
 def get_file_upload(instance, filename):
-  return '/'.join(['media', instance.user.username, filename]) 
+  return '/'.join([instance.user.username, filename]) 
 
 class User(AbstractBaseUser):
   """

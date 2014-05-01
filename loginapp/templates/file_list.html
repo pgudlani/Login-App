@@ -14,7 +14,7 @@ Files -  {{files.count}}
 {% for file in files %}
 <br>
 <br>
-{{file.name}} by {{file.user.name}}
+<a href="{{file.filename.url}}/">{{file.name}}</a> by {{file.user.name}}
 <br>
 {{file.description}}
 <br>
