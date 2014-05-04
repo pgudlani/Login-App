@@ -54,7 +54,7 @@ class HomeView(ListView):
   context_object_name = 'files'
 
   def get_queryset(self):
-    return File.objects.all().order_by('-id')
+    return File.objects.filter(user=self.request.user).order_by('-id')
   
   def dispatch(self, *args, **kwargs):
     if self.request.user and self.request.user.is_active:
