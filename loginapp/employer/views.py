@@ -13,6 +13,13 @@ from employer.forms import *
 
 
 class SignUpView(View):
+  def post(self, request, *args, **kwargs):
+    form = SignUpForm(data=self.request.POST)
+    error = ''
+    if form.is_valid():
+      user = form.save()
+      return HttpResponseRedirect('../home/')
+    return render_to_response('login.html', {'form':form, 'error':error, 'login':False}, context_instance=RequestContext(request))
   def get(self, request, *args, **kwargs):
     form = SignUpForm()
     return render_to_response('login.html', {'form' : form, 'login':False}, context_instance=RequestContext(request))

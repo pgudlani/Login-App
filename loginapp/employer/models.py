@@ -39,6 +39,8 @@ class EUser(AbstractBaseUser):
   company = models.ForeignKey(Company, related_name='eusers', null=True)    # null=True as first a user is created then is assigned to a company
   role = models.ForeignKey('Role', null=True)     # null=True as role is assigned after the user is created
   
+  USERNAME_FIELD = 'username'
+  
   def __unicode__(self):
     return self.username + ' :: ' + self.first_name + ' ' + self.last_name
 
