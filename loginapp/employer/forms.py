@@ -26,3 +26,12 @@ class SignUpForm(forms.ModelForm):
     if commit:
       user.save()
       return user
+
+class LoginForm(forms.ModelForm):
+
+  class Meta:
+    model = EUser
+    fields = ['username','password']
+
+
+
