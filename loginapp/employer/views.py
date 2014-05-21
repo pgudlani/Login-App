@@ -13,25 +13,37 @@ from employer.forms import *
 
 
 class SignUpView(View):
+  def post(self, request, *args, **kwargs):
+    form = SignUpForm(data=self.request.POST)
+    error = ''
+    if form.is_valid():
+      user = form.save()
+      return HttpResponseRedirect('../home/')
+    return render_to_response('login.html', {'form':form, 'error':error, 'login':False}, context_instance=RequestContext(request))
   def get(self, request, *args, **kwargs):
     form = SignUpForm()
     return render_to_response('login.html', {'form' : form, 'login':False}, context_instance=RequestContext(request))
 
 class LoginView(View):
-  def get(self, request, *args, **kwargs):
+  def post(self, request, *args, **kwargs):
    form = LoginForm(data=self.request.POST)
    error = '' 
    if form.is_valid():
 	user = authenticate(username=request.POST['username'], password=request.POST['password'])
-
 	if user is not None:
 	  if user.is_active:
 	   login(request, user)
-	   return HttpResponseRedirect('/home/')
-        elif User.objects.filter(username=request.POST['username']).exists():
-          error = 'Wrong Password'
+	   return HttpResponseRedirect('../home/')
+        elif EUser.objects.filter(username=request.POST['username']).exists():
+          error = 'Wrong Password'	
         else:
           error = 'Username does not exit'
+   return render_to_response('login.html', {'form' : form, 'login' : True, 'error' : error}, context_instance=RequestContext(request))
+
+  def get(self, request, *args, **kwargs):
+  # if self.request.user and self.request.user.is_active:
+   #  return HttpResponseRedirect('/home/')
+   form = LoginForm()
    return render_to_response('login.html', {'form' : form, 'login' : True}, context_instance=RequestContext(request))
 
 
