@@ -7,7 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = os.path.dirname(__file__)
 AUTH_USER_MODEL = 'fileIn.User'
-AUTHENTICATION_BACKENDS = ['fileIn.backends.CustomAuthBackend', ]
+AUTHENTICATION_BACKENDS = ['employer.backends.CustomAuthBackend', ]
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
