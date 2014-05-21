@@ -8,7 +8,8 @@ from django.conf import settings
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'loginapp.views.home', name='home'),
-    url(r'^', include('fileIn.urls')),
+    url(r'^filein/', include('fileIn.urls')),
+    url(r'^employer/', include('employer.urls')),
     url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
 
